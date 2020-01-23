@@ -4,11 +4,11 @@ const multer = require('multer')
 const path = require('path')
 
 const mysql = require('../config/dbconfig')
-const { add,show,edit,dlt } = require('../model/Hotel')
+const { add,show,edit,dlt } = require('../model/Room')
 
 const storage = multer.diskStorage({
     destination: function(req, files, cb) {
-        cb(null, './upload/hotel');
+        cb(null, './upload/room');
      },
     filename: function (req, file, cb) {
         cb(null , file.originalname);
@@ -24,7 +24,7 @@ const fileFilter = function (req, files, cb) {
 const upload = multer({storage: storage,fileFilter: fileFilter})
 
 
-/* ADD HOTEL */
+/* ADD ROOM */
 router.post('/',upload.array('image',3),(req,res)=>{
     var image = ''
 
@@ -35,10 +35,10 @@ router.post('/',upload.array('image',3),(req,res)=>{
         image += (req.files[i].originalname + ', ')
     }
     
-	const { name,price,id_city,longitude,latitude,property,description } = req.body
+	const { id_hotel,name,description } = req.body
 	const created_on = new Date()
     const updated_on = new Date()
-	mysql.execute(add,[name,'0',image,price,id_city,longitude,latitude,property,description,created_on,updated_on],(err,result,field)=>{
+	mysql.execute(add,[name,'0',id_hotel,image,description,created_on,updated_on],(err,result,field)=>{
         if (err) {
             console.log(err)
             res.send('error cuy')
@@ -50,7 +50,7 @@ router.post('/',upload.array('image',3),(req,res)=>{
 	})
 })
 
-/* SHOW HOTEL */
+/* SHOW ROOM */
 router.get('/',(req,res)=>{
     mysql.query(show,[],(err,result,field)=>{
 		res.send({
@@ -60,7 +60,7 @@ router.get('/',(req,res)=>{
 	})
 })
 
-/* EDIT HOTEL */
+/* EDIT ROOM */
 router.put('/:id',upload.array('image',3),(req,res)=>{
     var image = ''
 
@@ -72,9 +72,10 @@ router.put('/:id',upload.array('image',3),(req,res)=>{
     }
 
     const { id } = req.params
-    const { name,price,id_city,longitude,latitude,property,description } = req.body
+    const { id_hotel,name,description } = req.body
     const updated_on = new Date()
-	mysql.execute(edit,[name,image,price,id_city,longitude,latitude,property,description,updated_on,id],(err,result,field)=>{
+    console.log(name,id_hotel,image,description,updated_on,id)
+	mysql.execute(edit,[name,id_hotel,image,description,updated_on,id],(err,result,field)=>{
 		if (err) {
             console.log(err)
             res.send('error cuy')
@@ -86,7 +87,7 @@ router.put('/:id',upload.array('image',3),(req,res)=>{
 	})
 })
 
-/* DELETE HOTEL */
+/* DELETE ROOM */
 router.delete('/:id',(req,res)=>{
     const { id } = req.params
     mysql.query(dlt,[id],(err,result,field)=>{

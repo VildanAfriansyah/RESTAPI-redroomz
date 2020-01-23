@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs')
 
 
 const mysql = require('../config/dbconfig')
-const { login } = require('../model/user')
+const { login } = require('../model/User')
 
 
 /* LOGIN */

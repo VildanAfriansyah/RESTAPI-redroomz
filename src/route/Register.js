@@ -3,7 +3,7 @@ const router = require('express').Router()
 const bcrypt = require('bcryptjs')
 
 const mysql = require('../config/dbconfig')
-const { register } = require('../model/user')
+const { register } = require('../model/User')
 
 /* REGISTER */
 router.post('/register',(req,res)=>{
@@ -24,6 +24,7 @@ router.post('/register',(req,res)=>{
                 mysql.execute('INSERT INTO profile (id_user,name,email,created_on,updated_on) VALUES (?,?,?,?,?)',
                 [id_user,name,email,created_on,updated_on],(err,rresult,field)=>{
                     if(err){
+                        console.log(err)
                         res.send({
                             succes: false,
                             msg: 'Email already exist'

@@ -4,7 +4,7 @@ var nodemailer = require('nodemailer')
 const bcrypt = require('bcryptjs')
 
 const mysql = require('../config/dbconfig')
-const { login } = require('../model/user')
+const { login } = require('../model/User')
 
 var length = 8
 var newPassword      = ''
@@ -42,7 +42,7 @@ router.post('/forgot_password',(req,res)=>{
                         service: 'gmail',
                         auth: {
                             user: 'forgot.redroomz@gmail.com',
-                            pass: 'dkwndkqkn'
+                            pass: process.env.EMAIL_PASSWORD
                         }
                     })
                     

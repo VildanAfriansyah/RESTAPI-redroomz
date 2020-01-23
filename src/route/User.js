@@ -7,7 +7,7 @@ const path = require('path')
 
 const { auth } = require('../config/middleware')
 const mysql = require('../config/dbconfig')
-const { edit,add } = require('../model/user')
+const { edit,add } = require('../model/User')
 
 
 const storage = multer.diskStorage({
