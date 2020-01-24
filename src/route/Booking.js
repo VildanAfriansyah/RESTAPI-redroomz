@@ -2,30 +2,44 @@ require('dotenv').config
 const router = require('express').Router()
 
 const mysql = require('../config/dbconfig')
-const { add, history, edit, dlt } = require('../model/Topup')
+const { add, history, edit, dlt } = require('../model/Booking')
 
 
-/* ADD TOPUP */
+/* ADD BOOKING */
 router.post('/:id',(req,res)=>{
     const { id } = req.params
-	const { saldo } = req.body
+	const { id_hotel,id_room,checkin,checkout,email,name,no_hp } = req.body
 	const created_on = new Date()
     const updated_on = new Date()
-	mysql.execute(add,[saldo,id,created_on,updated_on],(err,result,field)=>{
-        mysql.execute('UPDATE profile SET saldo = (saldo + ?) WHERE id_user = ?',[saldo,id],(err,result,field)=>{
-            if (err) {
-                console.log(err)
-                res.send('error cuy')
-            }else{
+    console.log(id_hotel,id_room,checkin,checkout,email,name,no_hp,id)
+    mysql.execute('SELECT saldo FROM profile WHERE id_user = ?',[id],(err,result,field)=>{
+        const saldo = result[0].saldo
+        mysql.execute('SELECT price FROM rooms WHERE id_room = ?',[id_room],(err,result1,field)=>{
+            const price = result1[0].price
+            if(saldo < price){
                 res.send({
-                    success:true,data:result
+                    success: false,
+                    msg: 'the balance is not sufficient'
+                })
+            }else{
+                mysql.execute(add,[id_hotel,id_room,checkin,checkout,email,name,no_hp,id,created_on,updated_on],
+                (err,result2,field)=>{
+                    if (err) {
+                        console.log(err)
+                        res.send('error cuy')
+                    }else{
+                        res.send({
+                            success:true,
+                            data:result2
+                        })
+                    }
                 })
             }
         })
-	})
+    })
 })
 
-/* HISTORY TOPUP */
+/* HISTORY BOOKING */
 router.get('/:id',(req,res)=>{
     const { id } = req.params
     mysql.query(history,[id],(err,result,field)=>{
@@ -36,44 +50,45 @@ router.get('/:id',(req,res)=>{
 	})
 })
 
-/* EDIT TOPUP */
-router.put('/:id/:id_topup',(req,res)=>{
-    const { id_topup,id } = req.params
-    const { saldo } = req.body
+/* EDIT BOOKING */
+router.put('/:id/:id_booking',(req,res)=>{
+    const { id,id_booking } = req.params
+	const { id_hotel,id_room,checkin,checkout,email,name,no_hp } = req.body
     const updated_on = new Date()
-	mysql.execute(edit,[saldo,updated_on,id_topup],(err,result,field)=>{
-        mysql.execute('SELECT SUM(saldo) AS total_saldo FROM topup WHERE id_user = ?',[id],(err,result1,field)=>{
-            const total = result1[0].total_saldo
-            mysql.execute('UPDATE profile SET saldo = ?',[total],(err,result,field)=>{
-                if (err) {
-                    console.log(err)
-                    res.send('error cuy')
-                }else{
-                    res.send({
-                        success:true,data:result
-                    })
-                }
-            })
+	mysql.execute('SELECT saldo FROM profile WHERE id_user = ?',[id],(err,result,field)=>{
+        const saldo = result[0].saldo
+        mysql.execute('SELECT price FROM rooms WHERE id_room = ?',[id_room],(err,result1,field)=>{
+            const price = result1[0].price
+            if(saldo < price){
+                res.send({
+                    success: false,
+                    msg: 'the balance is not sufficient'
+                })
+            }else{
+                mysql.execute(edit,[id_hotel,id_room,checkin,checkout,email,name,no_hp,updated_on,id_booking],
+                (err,result2,field)=>{
+                    if (err) {
+                        console.log(err)
+                        res.send('error cuy')
+                    }else{
+                        res.send({
+                            success:true,
+                            data:result2
+                        })
+                    }
+                })
+            }
         })
 	})
 })
 
-/* DELETE TOPUP */
-router.delete('/:id/:id_topup',(req,res)=>{
-    const { id,id_topup } = req.params
-    mysql.query(dlt,[id_topup],(err,result,field)=>{
-		mysql.execute('SELECT SUM(saldo) AS total_saldo FROM topup WHERE id_user = ?',[id],(err,result1,field)=>{
-            const total = result1[0].total_saldo
-            mysql.execute('UPDATE profile SET saldo = ?',[total],(err,result,field)=>{
-                if (err) {
-                    console.log(err)
-                    res.send('error cuy')
-                }else{
-                    res.send({
-                        success:true,data:result
-                    })
-                }
-            })
+/* DELETE BOOKING */
+router.delete('/:id/:id_booking',(req,res)=>{
+    const { id,id_booking } = req.params
+    mysql.query(dlt,[id_booking],(err,result,field)=>{
+		res.send({
+            success:true,
+            data:result
         })
 	})
 })

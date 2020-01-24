@@ -35,10 +35,10 @@ router.post('/',upload.array('image',3),(req,res)=>{
         image += (req.files[i].originalname + ', ')
     }
     
-	const { name,price,id_city,longitude,latitude,property,description } = req.body
+	const { name,id_city,longitude,latitude,property,description } = req.body
 	const created_on = new Date()
     const updated_on = new Date()
-	mysql.execute(add,[name,'0',image,price,id_city,longitude,latitude,property,description,created_on,updated_on],(err,result,field)=>{
+	mysql.execute(add,[name,'0',image,id_city,longitude,latitude,property,description,created_on,updated_on],(err,result,field)=>{
         if (err) {
             console.log(err)
             res.send('error cuy')
@@ -72,9 +72,9 @@ router.put('/:id',upload.array('image',3),(req,res)=>{
     }
 
     const { id } = req.params
-    const { name,price,id_city,longitude,latitude,property,description } = req.body
+    const { name,id_city,longitude,latitude,property,description } = req.body
     const updated_on = new Date()
-	mysql.execute(edit,[name,image,price,id_city,longitude,latitude,property,description,updated_on,id],(err,result,field)=>{
+	mysql.execute(edit,[name,image,id_city,longitude,latitude,property,description,updated_on,id],(err,result,field)=>{
 		if (err) {
             console.log(err)
             res.send('error cuy')

@@ -22,7 +22,7 @@ const fileFilter = function (req, files, cb) {
         }
         cb(null, true)
     }
-    
+
 const upload = multer({storage: storage,fileFilter: fileFilter})
 
 
@@ -37,10 +37,10 @@ router.post('/',upload.array('image',3),(req,res)=>{
         image += (req.files[i].originalname + ', ')
     }
     
-	const { id_hotel,name,description } = req.body
+	const { id_hotel,name,price,description } = req.body
 	const created_on = new Date()
     const updated_on = new Date()
-	mysql.execute(add,[name,'0',id_hotel,image,description,created_on,updated_on],(err,result,field)=>{
+	mysql.execute(add,[name,price,'0',id_hotel,image,description,created_on,updated_on],(err,result,field)=>{
         if (err) {
             console.log(err)
             res.send('error cuy')
@@ -74,10 +74,9 @@ router.put('/:id',upload.array('image',3),(req,res)=>{
     }
 
     const { id } = req.params
-    const { id_hotel,name,description } = req.body
+    const { id_hotel,name,price,description } = req.body
     const updated_on = new Date()
-    console.log(name,id_hotel,image,description,updated_on,id)
-	mysql.execute(edit,[name,id_hotel,image,description,updated_on,id],(err,result,field)=>{
+	mysql.execute(edit,[name,price,id_hotel,image,description,updated_on,id],(err,result,field)=>{
 		if (err) {
             console.log(err)
             res.send('error cuy')

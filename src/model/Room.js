@@ -1,9 +1,9 @@
-const add = `INSERT INTO rooms (name,rate,id_hotel,image,description,created_on,updated_on) 
-            VALUES (?,?,?,?,?,?,?)`
+const add = `INSERT INTO rooms (name,price,rate,id_hotel,image,description,created_on,updated_on) 
+            VALUES (?,?,?,?,?,?,?,?)`
 
 const show = 'SELECT * FROM rooms'
 
-const edit = 'UPDATE rooms SET name = ?, id_hotel = ?, image = ?, description = ?, updated_on=? WHERE id_room = ?'
+const edit = 'UPDATE rooms SET name = ?, price = ?, id_hotel = ?, image = ?, description = ?, updated_on=? WHERE id_room = ?'
 
 const dlt = 'DELETE FROM rooms WHERE id_room = ?'
 
