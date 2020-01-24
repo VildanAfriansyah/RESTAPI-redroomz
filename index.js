@@ -10,6 +10,7 @@ const forgot = require('./src/route/Forgot_Password')
 const profile = require('./src/route/User')
 const hotel = require('./src/route/Hotel')
 const room = require('./src/route/Room')
+const topup = require('./src/route/Topup')
 
 
 const app = express()
@@ -27,6 +28,7 @@ app.use('/', forgot)
 app.use('/profile', profile)
 app.use('/hotel', hotel)
 app.use('/room', room)
+app.use('/topup', topup)
 
 
 const port = process.env.APP_PORT

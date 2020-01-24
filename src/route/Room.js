@@ -10,8 +10,8 @@ const storage = multer.diskStorage({
     destination: function(req, files, cb) {
         cb(null, './upload/room');
      },
-    filename: function (req, file, cb) {
-        cb(null , file.originalname);
+    filename: function (req, files, cb) {
+        cb(null , files.originalname);
     }
 })
 const fileFilter = function (req, files, cb) {

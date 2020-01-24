@@ -2,31 +2,33 @@ require('dotenv').config
 const router = require('express').Router()
 
 const mysql = require('../config/dbconfig')
-const { add,show,edit,dlt } = require('../model/Topup')
+const { add, history, edit, dlt } = require('../model/Topup')
 
 
-/* ADD ROOM */
-router.post('/',(req,res)=>{
+/* ADD TOPUP */
+router.post('/:id',(req,res)=>{
     const { id } = req.params
 	const { saldo } = req.body
 	const created_on = new Date()
     const updated_on = new Date()
 	mysql.execute(add,[saldo,id,created_on,updated_on],(err,result,field)=>{
-        if (err) {
-            console.log(err)
-            res.send('error cuy')
-        }else{
-            res.send({
-                success:true,
-                data:result
-            })
-        }
+        mysql.execute('UPDATE profile SET saldo = (saldo + ?) WHERE id_user = ?',[saldo,id],(err,result,field)=>{
+            if (err) {
+                console.log(err)
+                res.send('error cuy')
+            }else{
+                res.send({
+                    success:true,data:result
+                })
+            }
+        })
 	})
 })
 
-/* SHOW ROOM */
-router.get('/',(req,res)=>{
-    mysql.query(show,[],(err,result,field)=>{
+/* HISTORY TOPUP */
+router.get('/:id',(req,res)=>{
+    const { id } = req.params
+    mysql.query(history,[id],(err,result,field)=>{
 		res.send({
             success:true,
             data:result
@@ -34,35 +36,46 @@ router.get('/',(req,res)=>{
 	})
 })
 
-/* EDIT ROOM */
-router.put('/:id',(req,res)=>{
-
-    const { id } = req.params
-    const { id_hotel,name,description } = req.body
+/* EDIT TOPUP */
+router.put('/:id/:id_topup',(req,res)=>{
+    const { id_topup,id } = req.params
+    const { saldo } = req.body
     const updated_on = new Date()
-    console.log(name,id_hotel,image,description,updated_on,id)
-	mysql.execute(edit,[name,id_hotel,image,description,updated_on,id],(err,result,field)=>{
-		if (err) {
-            console.log(err)
-            res.send('error cuy')
-        }else{
-            res.send({
-                success:true,data:result
+	mysql.execute(edit,[saldo,updated_on,id_topup],(err,result,field)=>{
+        mysql.execute('SELECT SUM(saldo) AS total_saldo FROM topup WHERE id_user = ?',[id],(err,result1,field)=>{
+            const total = result1[0].total_saldo
+            mysql.execute('UPDATE profile SET saldo = ?',[total],(err,result,field)=>{
+                if (err) {
+                    console.log(err)
+                    res.send('error cuy')
+                }else{
+                    res.send({
+                        success:true,data:result
+                    })
+                }
             })
-        }
-	})
-})
-
-/* DELETE ROOM */
-router.delete('/:id',(req,res)=>{
-    const { id } = req.params
-    mysql.query(dlt,[id],(err,result,field)=>{
-		res.send({
-            success:true,
-            data:result
         })
 	})
 })
 
+/* DELETE TOPUP */
+router.delete('/:id/:id_topup',(req,res)=>{
+    const { id,id_topup } = req.params
+    mysql.query(dlt,[id_topup],(err,result,field)=>{
+		mysql.execute('SELECT SUM(saldo) AS total_saldo FROM topup WHERE id_user = ?',[id],(err,result1,field)=>{
+            const total = result1[0].total_saldo
+            mysql.execute('UPDATE profile SET saldo = ?',[total],(err,result,field)=>{
+                if (err) {
+                    console.log(err)
+                    res.send('error cuy')
+                }else{
+                    res.send({
+                        success:true,data:result
+                    })
+                }
+            })
+        })
+	})
+})
 
 module.exports = router

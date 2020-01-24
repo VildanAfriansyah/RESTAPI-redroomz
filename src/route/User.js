@@ -7,7 +7,7 @@ const path = require('path')
 
 const { auth } = require('../config/middleware')
 const mysql = require('../config/dbconfig')
-const { edit,add } = require('../model/User')
+const { edit, add, show } = require('../model/User')
 
 
 const storage = multer.diskStorage({
@@ -65,4 +65,14 @@ router.put('/:id',auth,upload.single('image'),(req,res)=>{
 	})
 })
 
+/* SHOW PROFILE */
+router.get('/:id',(req,res)=>{
+    const { id } = req.params
+    mysql.query(show,[id],(err,result,field)=>{
+		res.send({
+            success:true,
+            data:result
+        })
+	})
+})
 module.exports = router

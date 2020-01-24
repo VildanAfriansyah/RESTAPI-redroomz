@@ -1,9 +1,11 @@
-const add = `INSERT INTO topup (saldo,id_user,created_on,updated_on) VALUES (?,?,?,?)`
+const add       =   `INSERT INTO topup (saldo,id_user,created_on,updated_on) VALUES (?,?,?,?)`
 
-const show = 'SELECT *.topup, *.profile FROM topup INNER JOIN user ON topup.id_user=profile.id_user WHERE id_user = ?'
+const history   =   `SELECT profile.name, profile.id_user, topup.id_topup, topup.saldo, topup.created_on FROM profile 
+                    INNER JOIN topup ON profile.id_user=topup.id_user 
+                    WHERE topup.id_user = ?`
 
-const edit = 'UPDATE users SET saldo = ?, updated_on=? WHERE id_user = ?'
+const edit      =   'UPDATE topup SET saldo = ?, updated_on=? WHERE id_topup = ?'
 
-// const dlt = 'DELETE FROM topup WHERE id_topup = ?'
+const dlt       =   'DELETE FROM topup WHERE id_topup = ?'
 
-module.exports = { add,show,edit }
+module.exports = { add, history, edit, dlt }
