@@ -11,6 +11,7 @@ const profile = require('./src/route/User')
 const hotel = require('./src/route/Hotel')
 const room = require('./src/route/Room')
 const topup = require('./src/route/Topup')
+const booking = require('./src/route/Booking')
 
 
 const app = express()
@@ -29,6 +30,7 @@ app.use('/profile', profile)
 app.use('/hotel', hotel)
 app.use('/room', room)
 app.use('/topup', topup)
+app.use('/booking', booking)
 
 
 const port = process.env.APP_PORT

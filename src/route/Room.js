@@ -14,6 +14,7 @@ const storage = multer.diskStorage({
         cb(null , files.originalname);
     }
 })
+
 const fileFilter = function (req, files, cb) {
         var ext = path.extname(files.originalname)
         if(ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg') {
@@ -21,6 +22,7 @@ const fileFilter = function (req, files, cb) {
         }
         cb(null, true)
     }
+    
 const upload = multer({storage: storage,fileFilter: fileFilter})
 
 
