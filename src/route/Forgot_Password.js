@@ -68,8 +68,4 @@ router.post('/forgot_password',(req,res)=>{
 })
 
 
-
-
-
-
 module.exports = router

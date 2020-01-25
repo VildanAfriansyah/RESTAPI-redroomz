@@ -14,6 +14,8 @@ const topup = require('./src/route/Topup')
 const booking = require('./src/route/Booking')
 const bill = require('./src/route/Bill')
 const search = require('./src/route/Search')
+const sort = require('./src/route/Sort')
+const logout = require('./src/route/Logout')
 
 
 const app = express()
@@ -28,13 +30,15 @@ app.use('/image/room', express.static('upload/room'))
 app.use('/', login)
 app.use('/', register)
 app.use('/', forgot)
+app.use('/', search)
+app.use('/', sort)
+app.use('/', logout)
 app.use('/profile', profile)
 app.use('/hotel', hotel)
 app.use('/room', room)
 app.use('/topup', topup)
 app.use('/booking', booking)
 app.use('/bill', bill)
-app.use('/search', search)
 
 
 const port = process.env.APP_PORT

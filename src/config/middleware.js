@@ -16,6 +16,7 @@ const auth = (req,res,next)=>{
                     var token = result[0].token
                     try{
                         if(status === 0){
+                            req.user = user
                             next()
                         }else{
                             res.send({

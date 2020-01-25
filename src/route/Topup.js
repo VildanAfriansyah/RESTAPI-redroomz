@@ -2,12 +2,13 @@ require('dotenv').config
 const router = require('express').Router()
 
 const mysql = require('../config/dbconfig')
+const { auth } = require('../config/middleware')
 const { add, history, edit, dlt } = require('../model/Topup')
 
 
 /* ADD TOPUP */
-router.post('/:id',(req,res)=>{
-    const { id } = req.params
+router.post('/',auth,(req,res)=>{
+    const { id } = req.user
 	const { saldo } = req.body
 	const created_on = new Date()
     const updated_on = new Date()
@@ -26,19 +27,24 @@ router.post('/:id',(req,res)=>{
 })
 
 /* HISTORY TOPUP */
-router.get('/:id',(req,res)=>{
-    const { id } = req.params
+router.get('/',auth,(req,res)=>{
+    const { id } = req.user
     mysql.query(history,[id],(err,result,field)=>{
-		res.send({
-            success:true,
-            data:result
-        })
+		if (err) {
+            console.log(err)
+            res.send('error cuy')
+        }else{
+            res.send({
+                success:true,data:result
+            })
+        }
 	})
 })
 
 /* EDIT TOPUP */
-router.put('/:id/:id_topup',(req,res)=>{
-    const { id_topup,id } = req.params
+router.put('/:id_topup',(req,res)=>{
+    const { id } = req.user
+    const { id_topup } = req.params
     const { saldo } = req.body
     const updated_on = new Date()
 	mysql.execute(edit,[saldo,updated_on,id_topup],(err,result,field)=>{
@@ -59,8 +65,9 @@ router.put('/:id/:id_topup',(req,res)=>{
 })
 
 /* DELETE TOPUP */
-router.delete('/:id/:id_topup',(req,res)=>{
-    const { id,id_topup } = req.params
+router.delete('/:id_topup',(req,res)=>{
+    const { id } = req.user
+    const { id_topup } = req.params
     mysql.query(dlt,[id_topup],(err,result,field)=>{
 		mysql.execute('SELECT SUM(saldo) AS total_saldo FROM topup WHERE id_user = ?',[id],(err,result1,field)=>{
             const total = result1[0].total_saldo

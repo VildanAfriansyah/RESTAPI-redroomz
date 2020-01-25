@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 25 Jan 2020 pada 16.23
+-- Waktu pembuatan: 25 Jan 2020 pada 20.04
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.1
 
@@ -44,7 +44,10 @@ CREATE TABLE `bill` (
 INSERT INTO `bill` (`id_bill`, `id_user`, `id_booking`, `total_price`, `created_on`, `updated_on`) VALUES
 (1, 6, 1, 100000, '2020-01-24 20:14:49', '2020-01-24 20:14:49'),
 (3, 9, 2, 300000, '2020-01-24 20:18:33', '2020-01-24 20:18:33'),
-(4, 9, 3, 300000, '2020-01-24 21:07:03', '2020-01-24 21:07:03');
+(4, 9, 3, 300000, '2020-01-24 21:07:03', '2020-01-24 21:07:03'),
+(6, 1, 7, 300000, '2020-01-25 17:05:44', '2020-01-25 17:05:44'),
+(7, 1, 12, 503501, '2020-01-25 18:20:10', '2020-01-25 18:20:10'),
+(8, 1, 12, 503501, '2020-01-25 18:21:20', '2020-01-25 18:21:20');
 
 -- --------------------------------------------------------
 
@@ -56,7 +59,6 @@ CREATE TABLE `booking` (
   `id_booking` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `id_hotel` int(11) NOT NULL,
-  `id_room` int(11) NOT NULL,
   `checkin` date NOT NULL,
   `checkout` date NOT NULL,
   `email` varchar(50) DEFAULT NULL,
@@ -71,12 +73,18 @@ CREATE TABLE `booking` (
 -- Dumping data untuk tabel `booking`
 --
 
-INSERT INTO `booking` (`id_booking`, `id_user`, `id_hotel`, `id_room`, `checkin`, `checkout`, `email`, `name`, `no_hp`, `created_on`, `updated_on`, `status`) VALUES
-(1, 6, 1, 1, '2020-01-25', '2020-01-25', 'Aurelie_Schamberger50@yahoo.com', 'SkyNeko', '0895349060749', '2020-01-24 18:21:21', '2020-01-24 19:51:03', 1),
-(2, 9, 1, 4, '2020-01-25', '2020-01-25', 'Adelle_Jast40@gmail.com', 'SkyNeko', '0895349060749', '2020-01-24 18:37:53', '2020-01-24 18:37:53', 0),
-(4, 6, 1, 4, '2020-01-25', '2020-01-25', 'Mia72@yahoo.com', 'vildan', '0895349060749', '2020-01-24 20:12:40', '2020-01-24 20:12:40', 0),
-(5, 6, 1, 4, '2020-01-25', '2020-01-25', 'Edythe.Homenick43@gmail.com', 'vildan', '0895349060749', '2020-01-24 21:18:00', '2020-01-24 21:18:00', 0),
-(6, 6, 1, 4, '2020-01-25', '2020-01-25', 'Elza88@gmail.com', 'vildan', '0895349060749', '2020-01-24 21:18:23', '2020-01-24 21:18:23', 0);
+INSERT INTO `booking` (`id_booking`, `id_user`, `id_hotel`, `checkin`, `checkout`, `email`, `name`, `no_hp`, `created_on`, `updated_on`, `status`) VALUES
+(1, 6, 1, '2020-01-25', '2020-01-25', 'Aurelie_Schamberger50@yahoo.com', 'SkyNeko', '0895349060749', '2020-01-24 18:21:21', '2020-01-24 19:51:03', 1),
+(2, 9, 1, '2020-01-25', '2020-01-25', 'Adelle_Jast40@gmail.com', 'SkyNeko', '0895349060749', '2020-01-24 18:37:53', '2020-01-24 18:37:53', 0),
+(4, 6, 1, '2020-01-25', '2020-01-25', 'Mia72@yahoo.com', 'vildan', '0895349060749', '2020-01-24 20:12:40', '2020-01-24 20:12:40', 0),
+(5, 6, 1, '2020-01-25', '2020-01-25', 'Edythe.Homenick43@gmail.com', 'vildan', '0895349060749', '2020-01-24 21:18:00', '2020-01-24 21:18:00', 0),
+(6, 6, 1, '2020-01-25', '2020-01-25', 'Elza88@gmail.com', 'vildan', '0895349060749', '2020-01-24 21:18:23', '2020-01-24 21:18:23', 0),
+(7, 1, 1, '2020-01-25', '2020-01-25', 'Collin80@hotmail.com', 'vildan', '0895349060749', '2020-01-25 16:58:21', '2020-01-25 16:58:21', 0),
+(8, 1, 1, '2020-01-26', '2020-01-26', 'Torrey10@yahoo.com', 'vildan', '0895349060749', '2020-01-25 17:00:03', '2020-01-25 17:00:03', 0),
+(9, 1, 1, '2020-01-26', '2020-01-26', 'Kelli87@gmail.com', 'vildan', '0895349060749', '2020-01-25 17:00:17', '2020-01-25 17:00:17', 0),
+(10, 1, 1, '2020-01-26', '2020-01-26', 'Perry.Haag@gmail.com', 'vildan', '0895349060749', '2020-01-25 17:00:54', '2020-01-25 17:00:54', 0),
+(11, 1, 1, '2020-01-26', '2020-01-26', 'Delpha.Wunsch67@yahoo.com', 'vildan', '0895349060749', '2020-01-25 17:01:37', '2020-01-25 17:01:37', 0),
+(12, 1, 15, '2020-01-26', '2020-01-26', 'Kellen_Steuber@gmail.com', 'vildan', '0895349060749', '2020-01-25 18:19:38', '2020-01-25 18:19:38', 0);
 
 -- --------------------------------------------------------
 
@@ -95,10 +103,10 @@ CREATE TABLE `city` (
 --
 
 INSERT INTO `city` (`id_city`, `city`, `id_province`) VALUES
-(1, 'CILEGON', 1),
-(2, 'LEBAK', 1),
-(3, 'PANDEGLANG', 1),
-(4, 'SERANG', 1),
+(1, 'JAKARTA', 1),
+(2, 'TANGERANG', 1),
+(3, 'BEKASI', 1),
+(4, 'BOGOR', 1),
 (5, 'TANGERANG', 1),
 (6, 'TANGERANG SELATAN', 1),
 (7, 'JAKARTA BARAT', 2),
@@ -574,10 +582,10 @@ INSERT INTO `city` (`id_city`, `city`, `id_province`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `hotels`
+-- Struktur dari tabel `hotel`
 --
 
-CREATE TABLE `hotels` (
+CREATE TABLE `hotel` (
   `id_hotel` int(11) NOT NULL,
   `image` varchar(255) NOT NULL,
   `name` varchar(50) NOT NULL,
@@ -592,10 +600,10 @@ CREATE TABLE `hotels` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `hotels`
+-- Dumping data untuk tabel `hotel`
 --
 
-INSERT INTO `hotels` (`id_hotel`, `image`, `name`, `rate`, `id_city`, `longitude`, `latitude`, `id_fasility`, `description`, `created_on`, `updated_on`) VALUES
+INSERT INTO `hotel` (`id_hotel`, `image`, `name`, `rate`, `id_city`, `longitude`, `latitude`, `id_fasility`, `description`, `created_on`, `updated_on`) VALUES
 (1, 'chocolatesundae.jpg, coca cola.png, doublecheesebite.jpg', 'Hotel Bali', 0, 1, '1231231', '123123', 'Free Wifi', 'lorem ipsum', '2020-01-23 15:54:19', '2020-01-23 15:54:19'),
 (2, 'chocolatesundae.jpg, coca cola.png, doublecheesebite.jpg', 'Hotel Bali', 0, 1, '1231231', '123123', 'Free Wifi', 'lorem ipsum', '2020-01-23 17:32:12', '2020-01-23 17:32:12'),
 (3, 'bigmac.jpg, blackpaper chicken rice.png, chickenwings.jpg', '123', 0, 123, '231', '123', '123', '123', '2020-01-23 17:42:19', '2020-01-23 17:42:19'),
@@ -607,6 +615,89 @@ INSERT INTO `hotels` (`id_hotel`, `image`, `name`, `rate`, `id_city`, `longitude
 (10, 'chocolatesundae.jpg, coca cola.png, doublecheesebite.jpg', 'Hotel Baliqweqw', 0, 3, '1231231', '123123', 'Free Wifi', 'lorem ipsum', '2020-01-25 10:07:30', NULL),
 (11, 'chocolatesundae.jpg, coca cola.png, doublecheesebite.jpg', 'Hotel Baliqweqw', 0, 2, '1231231', '123123', 'Free Wifi', 'lorem ipsum', '2020-01-25 10:07:27', '2020-01-24 17:15:13'),
 (12, 'chocolatesundae.jpg, coca cola.png, doublecheesebite.jpg', 'Hotel Baliqweqw', 0, 2, '1231231', '123123', 'Free Wifi', 'lorem ipsum', '2020-01-25 10:07:24', '2020-01-24 18:02:04');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `hotels`
+--
+
+CREATE TABLE `hotels` (
+  `id_hotel` int(11) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `rate` float NOT NULL,
+  `id_city` int(11) NOT NULL,
+  `longitude` varchar(30) NOT NULL,
+  `latitude` varchar(30) NOT NULL,
+  `price` int(11) NOT NULL,
+  `description` longtext NOT NULL,
+  `created_on` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_on` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `hotels`
+--
+
+INSERT INTO `hotels` (`id_hotel`, `image`, `name`, `rate`, `id_city`, `longitude`, `latitude`, `price`, `description`, `created_on`, `updated_on`) VALUES
+(15, 'https://static.misteraladin.com/images/hotel/0000042000/0000041683/alpine-hotel-photo.400x225.jpg', 'Alpine Hotel', 0, 1, '', '', 503501, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(16, 'https://static.misteraladin.com/images/hotel/0000001000/0000000525/mandarin-oriental-jakarta-photo11.400x225.jpg', 'Mandarin Oriental 10', 0, 1, '', '', 2930403, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(17, 'https://static.misteraladin.com/images/hotel/0000001000/0000000506/le-meridien-jakarta-photo.400x225.jpg', 'Le Meridien 10', 0, 1, '', '', 2178000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(18, 'https://static.misteraladin.com/images/hotel/0000001000/0000000569/raffles-jakarta-photo12.400x225.jpg', 'Raffles 10', 0, 3, '', '', 3484800, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(19, 'https://static.misteraladin.com/images/hotel/0000001000/0000000582/fairmont-jakarta-photo.400x225.jpg', 'Fairmont 10', 0, 2, '', '', 3678914, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(20, 'https://static.misteraladin.com/images/hotel/0000001000/0000000524/grand-hyatt-jakarta-photo.400x225.jpg', 'Grand Hyatt 10', 0, 2, '', '', 3270147, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(21, 'https://static.misteraladin.com/images/hotel/0000001000/0000000873/mercure-jakarta-simatupang-photo26.400x225.jpg', 'Mercure Jakarta Simatupang', 0, 1, '', '', 1089000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(22, 'https://static.misteraladin.com/images/hotel/0000001000/0000000594/holiday-inn-express-jakarta-pluit-citygate-photo.400x225.jpg', 'Holiday Inn Express Jakarta Pluit Citygate', 0, 1, '', '', 621327, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(23, 'https://static.misteraladin.com/images/hotel/0000040000/0000039058/ibis-styles-jakarta-sunter-photo1.400x225.jpg', 'Ibis Styles Jakarta Sunter', 0, 3, '', '', 600001, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(24, 'https://static.misteraladin.com/images/hotel/0000001000/0000000512/hotel-indonesia-kempinski-jakarta-photo.400x225.jpg', 'Hotel Indonesia Kempinski 10', 0, 1, '', '', 3262519, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(25, 'https://static.misteraladin.com/images/hotel/0000001000/0000000519/pullman-jakarta-indonesia-photo1.400x225.jpg', 'Pullman Jakarta Indonesia', 0, 4, '', '', 2026751, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(26, 'https://static.misteraladin.com/images/hotel/0000042000/0000041709/house-of-arsonia-bougainvillea-photo.400x225.jpg', 'House of Arsonia Bougainvillea', 0, 4, '', '', 310000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(27, 'https://static.misteraladin.com/images/hotel/0000042000/0000041721/house-of-arsonia-flamboyant-photo.400x225.jpg', 'House of Arsonia Flamboyant', 0, 1, '', '', 310000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(28, 'https://static.misteraladin.com/images/hotel/0000042000/0000041728/fontana-residencia-guest-house-photo.400x225.jpg', 'Fontana Residencia Guest House', 0, 1, '', '', 339999, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(29, 'https://static.misteraladin.com/images/hotel/0000067000/0000066263/ibis-styles-bogor-raya-photo.400x225.jpg', 'ibis Styles Bogor Raya', 0, 2, '', '', 605000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(30, 'https://static.misteraladin.com/images/hotel/0000042000/0000041679/the-packer-lodge-hostel-photo22.400x225.jpg', 'The Packer Lodge - Hostel', 0, 1, '', '', 280125, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(31, 'https://static.misteraladin.com/images/hotel/0000043000/0000042033/holiday-inn-cikarang-jababeka-photo.400x225.jpg', 'Holiday Inn Cikarang Jababeka', 0, 4, '', '', 889468, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(32, 'https://static.misteraladin.com/images/hotel/0000042000/0000041631/hotel-banyuwangi-sintera-photo.400x225.jpg', 'Hotel Banyuwangi Sintera', 0, 1, '', '', 400001, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(33, 'https://static.misteraladin.com/images/hotel/0000039000/0000038938/holiday-inn-express-jakarta-international-expo-photo.400x225.jpg', 'Holiday Inn Express Jakarta International Expo', 0, 1, '', '', 1471566, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(34, 'https://static.misteraladin.com/images/hotel/0000042000/0000041647/four-seasons-hotel-jakarta-photo.400x225.jpg', 'Four Seasons Hotel 10', 0, 1, '', '', 3296703, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(35, 'https://static.misteraladin.com/images/hotel/0000042000/0000041674/the-westin-jakarta-photo.400x225.jpg', 'The Westin 10', 0, 1, '', '', 2855600, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(36, 'https://static.misteraladin.com/images/hotel/0000042000/0000041694/four-points-by-sheraton-jakarta-thamrin-photo4.400x225.jpg', 'Four Points by Sheraton Jakarta Thamrin', 0, 1, '', '', 1087790, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(37, 'https://static.misteraladin.com/images/hotel/0000042000/0000041707/hotel-lautze-indah-photo.400x225.jpg', 'Hotel Lautze Indah', 0, 1, '', '', 216501, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(38, 'https://static.misteraladin.com/images/hotel/0000042000/0000041670/coins-hotel-photo.400x225.jpg', 'Coin\'s Hotel', 0, 1, '', '', 450001, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(39, 'https://static.misteraladin.com/images/hotel/0000042000/0000041626/luxury-apartment-by-mediapura-photo9.400x225.jpg', 'Luxury Apartment by Mediapura', 0, 1, '', '', 725001, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(40, 'https://static.misteraladin.com/images/hotel/0000042000/0000041663/maxwell-sweet-apartment-photo21.400x225.jpg', 'Maxwell Sweet Apartment', 0, 1, '', '', 1250000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(41, 'https://static.misteraladin.com/images/hotel/0000001000/0000000523/mercure-jakarta-sabang-photo.400x225.jpg', 'Mercure Jakarta Sabang', 0, 1, '', '', 1316480, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(42, 'https://static.misteraladin.com/images/hotel/0000001000/0000000702/grand-whiz-hotel-kelapa-gading-photo.400x225.jpg', 'Grand Whiz Hotel Kelapa Gading', 0, 1, '', '', 590000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(43, 'https://static.misteraladin.com/images/hotel/0000001000/0000000490/discovery-hotel-convention-ancol-photo.400x225.jpg', 'Discovery Hotel & Convention Ancol', 0, 1, '', '', 824176, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(44, 'https://static.misteraladin.com/images/hotel/0000001000/0000000734/everyday-smart-hotel-mangga-besar-photo26.400x225.jpg', 'Everyday Smart Hotel Mangga Besar', 0, 1, '', '', 350000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(45, 'https://static.misteraladin.com/images/hotel/0000042000/0000041615/darcici-cempaka-putih-photo.400x225.jpg', 'd\'Arcici Cempaka Putih', 0, 1, '', '', 430001, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(46, 'https://static.misteraladin.com/images/hotel/0000043000/0000042513/swift-inn-aeropolis-airport-photo.400x225.jpg', 'Swift Inn Aeropolis Airport', 0, 3, '', '', 215000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(47, 'https://static.misteraladin.com/images/hotel/0000042000/0000041639/centro-city-service-apartment-photo.400x225.jpg', 'Centro City Service Apartment', 0, 1, '', '', 338000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(48, 'https://static.misteraladin.com/images/hotel/0000009000/0000008176/8176_grand-batik-inn-photo.400x225.jpg', 'Grand Batik Inn', 0, 1, '', '', 390000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(49, 'https://static.misteraladin.com/images/hotel/0000042000/0000041684/dprimahotel-itc-mangga-dua-photo.400x225.jpg', 'd\'primahotel ITC Mangga Dua', 0, 1, '', '', 515262, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(50, 'https://static.misteraladin.com/images/hotel/0000001000/0000000546/bale-ocasa-photo.400x225.jpg', 'Bale OCasa', 0, 3, '', '', 414400, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(51, 'https://static.misteraladin.com/images/hotel/0000041000/0000040489/amaris-hotel-pakuan-bogor.400x225.jpg', 'Amaris Hotel Pakuan 20', 0, 2, '', '', 521481, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(52, 'https://static.misteraladin.com/images/hotel/0000009000/0000008979/8979_flat-06-sampit-residence-photo11.400x225.jpg', 'Sampit Residence by Flat06', 0, 1, '', '', 398999, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(53, 'https://static.misteraladin.com/images/hotel/0000041000/0000040838/diradja-hotel-photo3.400x225.jpg', 'Diradja Hotel', 0, 1, '', '', 495000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(54, 'https://static.misteraladin.com/images/hotel/0000001000/0000000558/558_pomelotel-hotel17.400x225.jpg', 'Pomelotel', 0, 1, '', '', 551282, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(55, 'https://static.misteraladin.com/images/hotel/0000009000/0000008540/n1-hotel-photo21.400x225.jpg', 'N1 Hotel', 0, 1, '', '', 285000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(56, 'https://static.misteraladin.com/images/hotel/0000040000/0000039689/p-hotel-photo1.400x225.jpg', 'P Hotel', 0, 1, '', '', 420000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(57, 'https://static.misteraladin.com/images/hotel/0000039000/0000038935/zest-hotel-bogor-photo.400x225.jpg', 'Zest Hotel 20', 0, 2, '', '', 618310, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(58, 'https://static.misteraladin.com/images/hotel/0000001000/0000000877/amaris-hotel-tebet-jakarta-photo13.400x225.jpg', 'Amaris Hotel Tebet 10', 0, 1, '', '', 470000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(59, 'https://static.misteraladin.com/images/hotel/0000071000/0000070262/pesona-hotel-cikarang-photo14.400x225.jpg', 'Pesona Hotel Cikarang', 0, 4, '', '', 275001, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(60, 'https://static.misteraladin.com/images/hotel/0000039000/0000038998/the-acacia-jakarta-photo.400x225.jpg', 'The Acacia 10', 0, 1, '', '', 615000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(61, 'https://static.misteraladin.com/images/hotel/0000042000/0000041666/sare-suites-photo2.400x225.jpg', 'SARE Suites', 0, 1, '', '', 298999, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(62, 'https://static.misteraladin.com/images/hotel/0000009000/0000008318/sparks-life-jakarta-photo18.400x225.jpg', 'Sparks Life 10', 0, 1, '', '', 500000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(63, 'https://static.misteraladin.com/images/hotel/0000042000/0000041691/menteng-house-photo1.400x225.jpg', 'Menteng House', 0, 1, '', '', 450001, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(64, 'https://static.misteraladin.com/images/hotel/0000009000/0000008448/hotel-bintang-griyawisata-photo8.400x225.jpg', 'Hotel Bintang Griyawisata', 0, 1, '', '', 400000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(65, 'https://static.misteraladin.com/images/hotel/0000041000/0000040339/yasmin-karawaci12.400x225.jpg', 'Yasmin Karawaci', 0, 3, '', '', 524999, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(66, 'https://static.misteraladin.com/images/hotel/0000066000/0000065929/morrissey-hotel-residences-photo16.400x225.jpg', 'Morrissey Hotel Residences', 0, 1, '', '', 1386001, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(67, 'https://static.misteraladin.com/images/hotel/0000039000/0000038976/putri-duyung-ancol-photo7.400x225.jpg', 'Putri Duyung Ancol', 0, 1, '', '', 1455300, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(68, 'https://static.misteraladin.com/images/hotel/0000001000/0000000712/amaris-hotel-senen-photo.400x225.jpg', 'Amaris Hotel Senen', 0, 1, '', '', 437500, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(69, 'https://static.misteraladin.com/images/hotel/0000082000/0000081030/limperial-spalet-photo.400x225.jpg', 'L\'Imperial Spatel', 0, 4, '', '', 227500, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(70, 'https://static.misteraladin.com/images/hotel/0000043000/0000042065/amaris-hotel-citra-raya-tangerang-photo.400x225.jpg', 'Amaris Hotel Citra Raya - 30', 0, 3, '', '', 488400, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36'),
+(71, 'https://static.misteraladin.com/images/hotel/0000001000/0000000573/gran-melia-jakarta-photo9.400x225.jpg', 'Gran Melia 10', 0, 1, '', '', 1633500, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', '2020-01-25 17:13:57', '2020-01-25 17:07:36');
 
 -- --------------------------------------------------------
 
@@ -631,14 +722,8 @@ CREATE TABLE `profile` (
 --
 
 INSERT INTO `profile` (`id_profile`, `id_user`, `saldo`, `name`, `no_hp`, `email`, `image`, `created_on`, `updated_on`) VALUES
-(3, 6, 600000, 'Vildan', '0895349060749', 'asd@gmail.com', 'logo-arka.png', '2020-01-24 21:19:04', '2020-01-24 21:19:04'),
-(4, 7, 50000, 'eanz', NULL, 'eanpraha@gmail.com', NULL, '2020-01-24 12:43:53', '2020-01-24 12:43:53'),
-(5, 8, 50000, 'ean99', NULL, 'awifamz@gmail.com', NULL, '2020-01-24 12:43:53', '2020-01-24 12:43:53'),
-(6, 9, -400000, 'alghi', NULL, 'alghi77@gmail.com', NULL, '2020-01-24 21:07:03', '2020-01-24 21:07:03'),
-(7, 10, 50000, 'alghi', NULL, 'alghi77@gmail.com', NULL, '2020-01-24 12:43:53', '2020-01-24 12:43:53'),
-(8, 18, 50000, 'SkyNeko', NULL, 'vildanafriyansyah567@gmail.com1', NULL, '2020-01-24 12:43:53', '2020-01-24 12:43:53'),
-(10, 21, 50000, 'SkyNeko', NULL, 'vildanafriyansyah567@gmail.com1', NULL, '2020-01-24 12:43:53', '2020-01-24 12:43:53'),
-(11, 22, 50000, 'SkyNeko', NULL, 'vildanafriyansyah567@gmail.com1', NULL, '2020-01-24 12:43:53', '2020-01-24 12:43:53');
+(1, 1, 192998, 'Vildan', '0895349060749', 'asd@gmail.com', 'image.jpg', '2020-01-25 18:21:20', '2020-01-25 18:21:20'),
+(2, 2, 0, 'SkyNeko', NULL, 'vildanafriyansyah567@gmail.com', NULL, '2020-01-25 16:42:20', '2020-01-25 16:42:20');
 
 -- --------------------------------------------------------
 
@@ -716,7 +801,10 @@ INSERT INTO `revoked_token` (`id_revoked`, `token`, `status`, `login`, `logout`)
 (5, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVhbnp6IiwiaWQiOjgsImlhdCI6MTU3OTY5NzU3OX0.gpFl0evT_hSZngqkFurKAkxiyrNnIGWrDaeKsz_IOCY', 0, '2020-01-22 12:52:59', '0000-00-00 00:00:00'),
 (6, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hbnRhcCIsImlkIjo5LCJpYXQiOjE1Nzk3MTI0NTF9.GJD_5ED0VC6llW1T8gYGgv56XwfnZysvRPbNu7XNVmY', 0, '2020-01-22 17:00:51', '0000-00-00 00:00:00'),
 (7, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hbnRhcCIsImlkIjo5LCJpYXQiOjE1Nzk3MTI1ODV9.50A0ecsIYdr3G-p4tQDH4r42hlPD-76GRbnA93Lt9DE', 0, '2020-01-22 17:03:05', '0000-00-00 00:00:00'),
-(8, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hbnRhcCIsImlkIjo5LCJpYXQiOjE1Nzk3MTI3NTN9.fPoaf6ChA8Iy8uBETOSgZLf-C3JNunDjcbfIk0ED8NE', 0, '2020-01-22 17:05:53', '0000-00-00 00:00:00');
+(8, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hbnRhcCIsImlkIjo5LCJpYXQiOjE1Nzk3MTI3NTN9.fPoaf6ChA8Iy8uBETOSgZLf-C3JNunDjcbfIk0ED8NE', 0, '2020-01-22 17:05:53', '0000-00-00 00:00:00'),
+(9, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluNSIsImlkIjoyNCwiaWF0IjoxNTc5OTY4OTkzfQ.fDhAw7l09l8EgLBhYktgXKL5RQCAawVcXCTmktV17qI', 0, '2020-01-25 16:16:33', '0000-00-00 00:00:00'),
+(10, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluMSIsImlkIjoyLCJpYXQiOjE1Nzk5NzA1OTV9.pL8yukn1vWxbz_JJ6DaQ9Lp-ubTLvK3GCBo1m-S4kp0', 0, '2020-01-25 16:43:15', '0000-00-00 00:00:00'),
+(11, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOjEsImlhdCI6MTU3OTk3MDYwN30.heMjs98PHPvWBuVLVmdcuU_rd5OJLITybj6zqWqg2IA', 1, '2020-01-25 16:43:27', '2020-01-25 19:02:51');
 
 -- --------------------------------------------------------
 
@@ -765,7 +853,11 @@ CREATE TABLE `topup` (
 
 INSERT INTO `topup` (`id_topup`, `saldo`, `id_user`, `created_on`, `updated_on`) VALUES
 (1, 50000, 6, '2020-01-24 12:08:09', '2020-01-24 12:08:09'),
-(3, 100000, 6, '2020-01-24 12:50:00', '2020-01-24 12:50:00');
+(3, 100000, 6, '2020-01-24 12:50:00', '2020-01-24 12:50:00'),
+(4, 100000, 24, '2020-01-25 16:22:23', '2020-01-25 16:22:23'),
+(5, 30000, 24, '2020-01-25 16:23:15', '2020-01-25 16:23:15'),
+(6, 1000000, 1, '2020-01-25 16:44:05', '2020-01-25 16:44:05'),
+(7, 500000, 1, '2020-01-25 16:46:48', '2020-01-25 16:46:48');
 
 -- --------------------------------------------------------
 
@@ -786,16 +878,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `username`, `password`, `created_on`, `updated_on`) VALUES
-(1, 'admin', '$2a$10$5ZVOWp3yWEols2rO3YJPGe6GculZJp7sK.vPZUeiJ2kXSko1.8Y9G', '2020-01-22 06:41:49', '2020-01-22 06:38:07'),
-(3, 'admin1', '$2a$10$r/P9Sx3vbBHgrMFOC4569.S/b3uVy7gBxN9oKapAcRb1wdOaEFkZO', '2020-01-22 06:38:59', '2020-01-22 06:38:59'),
-(6, 'admin2', '$2a$10$umMze5WUIF69LJXMMy4sweXEm3EQuzWCN9uUHpt0zF.3wErAcFamy', '2020-01-23 12:34:51', '2020-01-22 07:31:22'),
-(7, 'eanaja', '$2a$10$qEPrDt26dUjcgVMnpohpLu35KZlk7xunMnj6INWsWN7It/8dTAd8m', '2020-01-22 12:51:46', '2020-01-22 12:51:46'),
-(8, 'eanzz', '$2a$10$X92pNG7uN4iIu9GzZGgvKO/YgwuXYV2EZjWTNsRghWskpp4YhAMsC', '2020-01-22 12:52:03', '2020-01-22 12:52:03'),
-(9, 'mantap', '$2a$10$rUQMcrrenx/zQnLWK8AH1.un1IP9qcFpc.ESDpFzQ.3TkCFdZapta', '2020-01-22 17:07:28', '2020-01-22 17:05:37'),
-(10, 'mantapbetul', '$2a$10$8Ar6/Q/3JP6QGMsp6u.Zju9Z0rN44ZhL0JF75YrY5X8WyTZ5hfQB.', '2020-01-22 17:07:04', '2020-01-22 17:06:35'),
-(18, 'SkyNeko', '$2a$10$DFW.fB.BFhzheO251wZvfegdL3/Ais3uqddrqzbP1DyH2bA9CDiDS', '2020-01-23 18:44:45', '2020-01-23 18:44:45'),
-(21, 'SkyNeko1231', '$2a$10$9inwVUzgBRtRM5RcJfhJxuB5Fxwkj/Sro9ClZ.p0PsGI7kp5e8tCi', '2020-01-24 10:27:12', '2020-01-24 10:27:12'),
-(22, 'SkyNeko1231123', '$2a$10$yK0buyrfW9uvAWNu3NYgCuC6cE28B7W1tHB8loSlKauAESiTvc3Tq', '2020-01-24 10:29:15', '2020-01-24 10:29:15');
+(1, 'admin', '$2a$10$aWKYkJo/VFgeR25DGKbhZehUj7IAX0Ltzq.Gl9YpwQ6tCZqXPngzm', '2020-01-25 16:42:17', '2020-01-25 16:42:17'),
+(2, 'admin1', '$2a$10$3wMaoJ41aGYKJJviy8hFW.aFKCqb9dr9Vx2M2aU4AJI.t8L6E2gK6', '2020-01-25 16:42:32', '2020-01-25 16:42:20');
 
 -- --------------------------------------------------------
 
@@ -833,6 +917,12 @@ ALTER TABLE `booking`
 --
 ALTER TABLE `city`
   ADD PRIMARY KEY (`id_city`);
+
+--
+-- Indeks untuk tabel `hotel`
+--
+ALTER TABLE `hotel`
+  ADD PRIMARY KEY (`id_hotel`);
 
 --
 -- Indeks untuk tabel `hotels`
@@ -891,13 +981,13 @@ ALTER TABLE `voucher`
 -- AUTO_INCREMENT untuk tabel `bill`
 --
 ALTER TABLE `bill`
-  MODIFY `id_bill` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_bill` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `id_booking` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_booking` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT untuk tabel `city`
@@ -906,16 +996,22 @@ ALTER TABLE `city`
   MODIFY `id_city` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=476;
 
 --
+-- AUTO_INCREMENT untuk tabel `hotel`
+--
+ALTER TABLE `hotel`
+  MODIFY `id_hotel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT untuk tabel `hotels`
 --
 ALTER TABLE `hotels`
-  MODIFY `id_hotel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_hotel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT untuk tabel `profile`
 --
 ALTER TABLE `profile`
-  MODIFY `id_profile` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_profile` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `province`
@@ -927,7 +1023,7 @@ ALTER TABLE `province`
 -- AUTO_INCREMENT untuk tabel `revoked_token`
 --
 ALTER TABLE `revoked_token`
-  MODIFY `id_revoked` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_revoked` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `rooms`
@@ -939,13 +1035,13 @@ ALTER TABLE `rooms`
 -- AUTO_INCREMENT untuk tabel `topup`
 --
 ALTER TABLE `topup`
-  MODIFY `id_topup` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_topup` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `voucher`
