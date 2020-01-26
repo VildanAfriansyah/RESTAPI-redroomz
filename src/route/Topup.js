@@ -19,7 +19,7 @@ router.post('/',auth,(req,res)=>{
                 res.send('error cuy')
             }else{ 
                 const description = 'Topup'
-                mysql.execute('INSERT INTO history (id_user,saldo,description) VALUES (?,?,?)',[id,saldo,description],(err,result2,field)=>{
+                mysql.execute('INSERT INTO history (id_user,saldo,description,created_on,updated_on) VALUES (?,?,?,?,?)',[id,saldo,description,created_on,updated_on],(err,result2,field)=>{
                     res.send({
                         success:true,
                         data:result

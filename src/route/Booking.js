@@ -1,5 +1,6 @@
 require('dotenv').config
 const router = require('express').Router()
+const moment = require('moment')
 
 const { auth } = require('../config/middleware')
 const mysql = require('../config/dbconfig')
@@ -10,38 +11,44 @@ const { add, history, edit, dlt } = require('../model/Booking')
 router.post('/:id_hotel',auth,(req,res)=>{
     const { id } = req.user
     const { id_hotel } = req.params
-	const { checkin,checkout,email,name,no_hp } = req.body
+    const { email,name,no_hp,room } = req.body
+    const checkin = new Date(req.body.checkin)
+    const checkout = new Date(req.body.checkout)
+    var day = moment(checkout).startOf('day').diff(moment(checkin).startOf('day'),'days')
+    console.log(day)
 	const created_on = new Date()
     const updated_on = new Date()
-    console.log(id_hotel,checkin,checkout,email,name,no_hp,id)
+    console.log(id_hotel,checkin,checkout,email,name,no_hp,id,day)
     mysql.execute('SELECT saldo FROM profile WHERE id_user = ?',[id],(err,result,field)=>{
         const saldo = result[0].saldo
-        console.log(saldo)
         mysql.execute('SELECT price FROM hotels WHERE id_hotel = ?',[id_hotel],(err,result1,field)=>{
             const price = result1[0].price
-            console.log(price)
-            if(saldo < price){
+            var total = (price * room) * day
+            console.log(price, room, day,total,saldo)
+            if(saldo < total){
                 res.send({
                     success: false,
                     msg: 'the balance is not sufficient'
                 })
             }else{
-                mysql.execute(add,[id_hotel,checkin,checkout,email,name,no_hp,id,created_on,updated_on],
+                mysql.execute(add,[id_hotel,checkin,checkout,email,name,total,room,no_hp,id,created_on,updated_on],
                 (err,result2,field)=>{
                     if (err) {
                         console.log(err)
                         res.send('error cuy')
                     }else{
-                        mysql.execute('SELECT * FROM hotels WHERE id_hotel = ?',[id_hotel],(err,result3)=>{
-                            const { name } = result3[0]
-                            const description = 'Booking'
-                            console.log(name,description)   
-                            mysql.execute('INSERT INTO history (id_user,name,description) VALUES (?,?,?)',[id,name,description],(err,result4,field)=>{
-                                    res.send({
-                                        success:true,
-                                        data:result2
+                        mysql.execute('UPDATE profile SET saldo = (saldo - ?) WHERE id_user = ?',[total,id],(err,result4,field)=>{
+                            mysql.execute('SELECT * FROM hotels WHERE id_hotel = ?',[id_hotel],(err,result3)=>{
+                                const { name } = result3[0]
+                                const description = 'Booking'
+                                console.log(name,description)   
+                                mysql.execute('INSERT INTO history (id_user,name,description,total,created_on,updated_on) VALUES (?,?,?,?,?,?)',[id,name,description,total,created_on,updated_on],(err,result4,field)=>{
+                                        res.send({
+                                            success:true,
+                                            data:result2
+                                        })
                                     })
-                                })
+                            })
                         })
                     }
                 })

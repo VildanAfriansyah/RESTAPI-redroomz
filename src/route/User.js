@@ -45,17 +45,23 @@ router.put('/change_password',auth,(req,res)=>{
 })
 
 /* ADD/EDIT PROFILE */
-router.put('/',auth,upload.single('image'),(req,res)=>{
-    var image = 'image.jpg'
-    if(req.file){
-       image = (req.file.originalname)
-    } 
+// router.put('/',auth,upload.single('image'),(req,res)=>{
+    router.put('/',auth,(req,res)=>{
+    var image = 'https://d3buf9vqrgrft6.cloudfront.net/assets/default_user-e9127509183b26c6472a9ef6b49a5719.png'
+    // if(req.file){
+    //    image = (req.file.originalname)
+    // } 
+    if(req.body.image){
+        image = req.body.image
+    }
     const { id } = req.user
-    const { name,no_hp,email,birthday } = req.body
+    const { name,no_hp,email } = req.body
+    const birthday = new Date(req.body.birthday)
     const updated_on = new Date()
+    console.log(name,birthday,no_hp,email,image,updated_on,id)
 	mysql.execute(add,[name,birthday,no_hp,email,image,updated_on,id],(err,result,field)=>{
 		if(err){
-            console.log
+            console.log(err)
             res.send({
                 succes: false,
             })

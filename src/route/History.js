@@ -9,7 +9,7 @@ const { history } = require('../model/History')
 /* HISTORY TOPUP */
 router.get('/history',auth,(req,res)=>{
     const { id } = req.user
-    mysql.query('SELECT * FROM history WHERE id_user = ?',[id],(err,result,field)=>{
+    mysql.query('SELECT * FROM history WHERE id_user = ? ORDER BY id_history DESC',[id],(err,result,field)=>{
 		if (err) {
             console.log(err)
             res.send('error cuy')
