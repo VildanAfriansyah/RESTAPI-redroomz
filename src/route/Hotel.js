@@ -51,10 +51,15 @@ router.post('/',upload.array('image',3),(req,res)=>{
 })
 
 /* SHOW HOTEL */
-router.get('/:by/:sort',(req,res)=>{
-    const { sort,by } = req.params
-    console.log(sort)
-    mysql.query(`SELECT hotels.*, city.city FROM hotels INNER JOIN city ON hotels.id_city=city.id_city ORDER BY ${by} ${sort} `,[sort],(err,result,field)=>{
+router.get('/',(req,res)=>{
+    let { by,sort,search } = req.query
+    search = search ? search : ''
+    sort = sort ? sort : 'asc'
+    by = by ? by : 'id_hotel'
+    console.log(search,by,sort)
+    mysql.query(`SELECT hotels.id_hotel, hotels.image, hotels.name, hotels.rate, hotels.price, city.city 
+    FROM hotels INNER JOIN city ON hotels.id_city=city.id_city 
+    WHERE hotels.name LIKE '%${search}%' OR city.city LIKE '%${search}%' ORDER BY ${by} ${sort} `,[],(err,result,field)=>{
 		res.send({
             success:true,
             data:result

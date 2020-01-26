@@ -11,7 +11,7 @@ router.get('/',(req,res)=>{
 	console.log(search)
 	mysql.execute(`SELECT hotels.id_hotel, hotels.image, hotels.name, hotels.rate, hotels.price, city.city 
     FROM hotels INNER JOIN city ON hotels.id_city=city.id_city 
-    WHERE name LIKE ?`,[`%` + search + `%`],(err,result,FileReader)=>{
+    WHERE name LIKE ? or `,[`%` + search + `%`],(err,result,FileReader)=>{
         if(result.length > 0 ){
             if (err) {
                 console.log(err)

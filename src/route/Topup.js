@@ -17,9 +17,13 @@ router.post('/',auth,(req,res)=>{
             if (err) {
                 console.log(err)
                 res.send('error cuy')
-            }else{
-                res.send({
-                    success:true,data:result
+            }else{ 
+                const description = 'Topup'
+                mysql.execute('INSERT INTO history (id_user,saldo,description) VALUES (?,?,?)',[id,saldo,description],(err,result2,field)=>{
+                    res.send({
+                        success:true,
+                        data:result
+                    })
                 })
             }
         })

@@ -51,9 +51,9 @@ router.put('/',auth,upload.single('image'),(req,res)=>{
        image = (req.file.originalname)
     } 
     const { id } = req.user
-    const { name,no_hp,email } = req.body
+    const { name,no_hp,email,birthday } = req.body
     const updated_on = new Date()
-	mysql.execute(add,[name,no_hp,email,image,updated_on,id],(err,result,field)=>{
+	mysql.execute(add,[name,birthday,no_hp,email,image,updated_on,id],(err,result,field)=>{
 		if(err){
             console.log
             res.send({

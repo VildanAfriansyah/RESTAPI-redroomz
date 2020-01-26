@@ -32,9 +32,16 @@ router.post('/:id_hotel',auth,(req,res)=>{
                         console.log(err)
                         res.send('error cuy')
                     }else{
-                        res.send({
-                            success:true,
-                            data:result2
+                        mysql.execute('SELECT * FROM hotels WHERE id_hotel = ?',[id_hotel],(err,result3)=>{
+                            const { name } = result3[0]
+                            const description = 'Booking'
+                            console.log(name,description)   
+                            mysql.execute('INSERT INTO history (id_user,name,description) VALUES (?,?,?)',[id,name,description],(err,result4,field)=>{
+                                    res.send({
+                                        success:true,
+                                        data:result2
+                                    })
+                                })
                         })
                     }
                 })
