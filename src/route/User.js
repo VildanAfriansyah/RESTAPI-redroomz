@@ -17,16 +17,15 @@ const storage = multer.diskStorage({
     filename: function (req, file, cb) {
         cb(null , file.originalname);
     }
-});
+})
 const fileFilter = function (req, file, cb) {
-        var ext = path.extname(file.originalname)
-        if(ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg') {
-            return cb('Extension not allowed')
-        }
-        cb(null, true)
+    var ext = path.extname(file.originalname)
+    if(ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg') {
+        return cb('Extension not allowed')
     }
+    cb(null, true)
+}
 const upload = multer({storage: storage,fileFilter: fileFilter})
-
 
 
 /* CHANGE PASSWORD */
@@ -35,6 +34,7 @@ router.put('/change_password',auth,(req,res)=>{
     const { password } = req.body
     const password_encrypted = bcrypt.hashSync(password)
     const updated_on = new Date()
+    console.log(password_encrypted,updated_on,id,password)
     mysql.execute(edit,[password_encrypted,updated_on,id],(err,result,field)=>{
         if(err){
             res.send({succes: false})

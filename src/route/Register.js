@@ -19,7 +19,7 @@ router.post('/register',(req,res)=>{
                 msg: 'Email already exist'
             })
         }else{
-            mysql.execute('SELECT id_user FROM users WHERE email = ? ',[email,],(err,result,field)=>{
+            mysql.execute('SELECT id_user FROM users WHERE email = ? ',[email],(err,result,field)=>{
                 const id_user = result[0].id_user
                 console.log(id_user,email)
                 mysql.execute('INSERT INTO profile (id_user,name,email,no_hp,image,created_on,updated_on) VALUES (?,?,?,?,?,?,?)',
